@@ -3,15 +3,7 @@
 #include <time.h>
 #include <math.h>
 //----------------------Protótipos---------------------------//
-    void MenuSelect(){
-        printf("selecione o modulo desejado:\n");
-        printf("1-Estatísticas de um Vetor\n");
-        printf("2—Verificações e Classificações\n");
-        printf("3-Sequências Matemáticas\n");
-        printf("4-Operações com Matrizes\n");
-        printf("5-Adivinhe o Vetor Secreto\n");
-        printf("|------------------------------|\n");
-        }
+    void MenuSelect();
 //---------------------------MAIN----------------------------//
 int main()
 {
@@ -27,11 +19,9 @@ MenuSelect();
             break;
                     case 3:
             printf("3-Sequências Matemáticas");
-            goto
                         break;
                     case 4:
             printf("4-Operações com Matrizes");
-            goto
                         break;
                     case 5:
             printf("5-Adivinhe o Vetor Secreto");
@@ -40,9 +30,14 @@ MenuSelect();
             printf("Opção invalida");
             break;
 }
-teste1:
-printf("\nteste1");
-return 0;
-teste2:
-printf("\n mein gott");
+
 }
+    void MenuSelect(){
+        printf("selecione o modulo desejado:\n");
+        printf("1-Estatísticas de um Vetor\n");
+        printf("2—Verificações e Classificações\n");
+        printf("3-Sequências Matemáticas\n");
+        printf("4-Operações com Matrizes\n");
+        printf("5-Adivinhe o Vetor Secreto\n");
+        printf("|------------------------------|\n");
+        }
