@@ -1,5 +1,5 @@
 
-((vou ainda arrumar)
+
 
 #include <stdio.h>
 #include <math.h>
@@ -83,8 +83,13 @@ float mediaVetor(float v[], int *n){
     
     int i;
     float soma;
+     soma = 0;
     
-    soma = somaVetor( v,  n);
+     
+    while(i  < *n){
+    soma = soma + v[i];
+    i++;
+    }
         
     float media;
     
@@ -103,7 +108,20 @@ float varianciaVetor(float v[], int *n){
     float variancia1 = 0;
     float variancia2;
     
-    float media = mediaVetor( v, n);
+   int i;
+    float soma;
+     soma = 0;
+    
+     
+    while(i  < *n){
+    soma = soma + v[i];
+    i++;
+    }
+        
+    float media;
+    
+    media = soma / *n;
+    
     
     for(int i = 0; i < *n; i++){
         
@@ -119,8 +137,34 @@ float varianciaVetor(float v[], int *n){
     
 }
 float desvioVetor(float v[], int *n){
+        float variancia;
+    float variancia1 = 0;
+    float variancia2;
     
-     float variancia;
+   int i;
+    float soma;
+     soma = 0;
+    
+     
+    while(i  < *n){
+    soma = soma + v[i];
+    i++;
+    }
+        
+    float media;
+    
+    media = soma / *n;
+    
+    
+    for(int i = 0; i < *n; i++){
+        
+        variancia2 = (v[i] - media) * (v[i] - media);
+        variancia1 = variancia2 + variancia1;
+        
+    }
+    
+    variancia = variancia1 / (*n - 1);
+    
         
     variancia  = varianciaVetor( v,  n);
         
@@ -158,9 +202,29 @@ float medianaVetor(float v[], int *n){
 void minMaxVetor(float v[], int *n, float *min, float *max){
     
         int i; 
-    if (v[i] < *min) *min = v[i];
- if (v[i] > *max) *max = v[i];
- 
+        
+        int posicao;
+    float confirmacao;
+    *max = v[0];
+
+    for(i = 1; i < *n; i++){
+        if(*max < v[i]){
+            *max = v[i];
+        }
+    }
+    
+    *min = v[0];
+
+    for(i = 1; i < *n; i++){
+        if(*min > v[i]){
+            *min = v[i];
+        }
+    }
+           
+            
+            
+            
+            
  printf("O menor valor é: %f e o Maior valor é: %f ", min, max);
     
 }
@@ -183,3 +247,4 @@ int main()
  minMaxVetor( v,  &n,  &min,  &max);
 
 }
+
