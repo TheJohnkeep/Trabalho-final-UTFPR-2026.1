@@ -182,27 +182,29 @@ float medianaVetor(float v[], int n){
     
     float mediana;
     float k;
-  
+    float copia[MAX];
     int i, j;
     
-  
+   for (i = 0; i < n; i++) {
+           copia[i] = v[i];
+   }
     
     for (i = 0; i < n - 1; i++) {
         for (j = 0; j < n - i - 1; j++) {
-            if ( v[i] >  v[j + 1]) {
-                k =  v[i];
-                v[i] =  v[j + 1];
-                v[j + 1] = k;
+            if ( copia[j] >  copia[j + 1]) {
+                k =  copia[i];
+                copia[j] =  copia[j + 1];
+                copia[j + 1] = k;
             }
         }
     }
     
    
     if(n % 2 == 0){
-        mediana = (v[n / 2] + v[(n / 2) - 1]) / 2;
+        mediana = (copia[n / 2] + copia[(n / 2) - 1]) / 2;
     }
     else{
-       mediana = v[n / 2];
+       mediana = copia[n / 2];
     }
     return mediana;
     
