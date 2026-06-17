@@ -215,8 +215,8 @@ void minMaxVetor(float v[], int n, float *min, float *max){
     
     int i; 
         
-    int posicaomax;
-    int posicaomin;
+    int posicaomax = 0;
+    int posicaomin = 0;
     float confirmacao;
     *max = v[0];
 
