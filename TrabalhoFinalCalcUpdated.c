@@ -215,13 +215,15 @@ void minMaxVetor(float v[], int n, float *min, float *max){
     
     int i; 
         
-    int posicao;
+    int posicaomax;
+    int posicaomin;
     float confirmacao;
     *max = v[0];
 
     for(i = 1; i < n; i++){
         if(*max < v[i]){
             *max = v[i];
+                posicaomax = i;
         }
     }
     
@@ -230,6 +232,7 @@ void minMaxVetor(float v[], int n, float *min, float *max){
     for(i = 1; i < n; i++){
         if(*min > v[i]){
             *min = v[i];
+                posicaomin = i;
         }
     }
            
@@ -237,9 +240,9 @@ void minMaxVetor(float v[], int n, float *min, float *max){
             
             
             
- printf("Maior valor: %.2f", *max);
+ printf("Maior valor: %.2f  (posicao %d)", *max, posicaomax);
  printf("\n");
- printf("Menor valor: %.2f", *min);
+ printf("Menor valor: %.2f  (posicao %d)", *min, posicaomin);
     
 }
 
