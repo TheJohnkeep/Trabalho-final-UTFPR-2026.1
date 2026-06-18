@@ -27,7 +27,7 @@ MenuSelect();
             printf("5-Adivinhe o Vetor Secreto");
             break;
                     default:
-            printf("Opção invalida");
+            printf("Opção invalida, tente novamente.");
             break;
 }
 
