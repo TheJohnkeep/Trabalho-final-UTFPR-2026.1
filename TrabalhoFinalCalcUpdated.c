@@ -192,7 +192,7 @@ float medianaVetor(float v[], int n){
     for (i = 0; i < n - 1; i++) {
         for (j = 0; j < n - i - 1; j++) {
             if ( copia[j] >  copia[j + 1]) {
-                k =  copia[i];
+                k =  copia[j];
                 copia[j] =  copia[j + 1];
                 copia[j + 1] = k;
             }
@@ -480,7 +480,7 @@ for(i = 0; i < cA; i++){
         }
     }
 
-    for (i = 0; i < cA; i++) {         
+    for (i = 0; i < lA; i++) {         
         for (j = 0; j < cB; j++) {     
             for (k = 0; k < cA; k++) { 
                 c[i][j] += a[i][k] * b[k][j];
