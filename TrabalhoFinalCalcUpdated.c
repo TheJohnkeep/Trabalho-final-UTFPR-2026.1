@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <math.h>
-
+#include <time.h>
+#include <string.h>
+#define MAXV 100
 #define MAX 20
 #define DIM 10
+#define MAXM3 30
 //----------------------Protótipos---------------------------//
 
 //--------------------------MENU--------------------------//
@@ -24,13 +26,13 @@ float medianaVetor(float v[], int n);
 void minMaxVetor(float v[], int n, float *min, float *max);
 
 //--------------------------MODULO 2--------------------------//
-
-
-
+void EscolheVetor(int vec[],int tamM2,int *tamM2R);
+int Isprimo(int n);
 //--------------------------MODULO 3--------------------------//
-
-
-
+void Fibonnaci(int nTermo,int vec[]);
+void Pot2(int nTermo,int vec[]);
+void numTrig(int nTermo,int vec[]);
+void menuM3();
 //--------------------------MODULO 4--------------------------//
 
 void lerMatriz(float m[][DIM], int *lin, int *col);
@@ -53,7 +55,7 @@ MenuSelect();
 
 int Choice;
 scanf("%d",&Choice);
-        
+int vec[MAXV], tamM2R=0;
 float v[MAX], min, max;
 int n;
 
@@ -78,9 +80,11 @@ int lA, cA, cB;
             break;
                     case 2:
             printf("2-Verificações e Classificações");
+	        EscolheVetor( vec, MAXV, &tamM2R);
             break;
                     case 3:
-            printf("3-Sequências Matemáticas");
+                         printf("3-Sequências Matemáticas");
+                        menuM3();
                         break;
                     case 4: printf("4-Operações com Matrizes");
                     
@@ -315,11 +319,309 @@ printf("\n");
 }
 
 //--------------------------FUNCOES DO MODULO 2--------------------------//
+void EscolheVetor(int vec[],int tamM2,int *tamM2R) {
+	char  testador[20], flag1[]="parar", flag2[]="0";
+	int aux, i=0;
+	printf("Informe um vetor de tamanho maximo de 100 valores,digite parar para contabilizar o vetor:\n");
+	while(i<=tamM2) {
+		printf("Elemento [%d]: ",i+1);
+		scanf("%19s",testador);
+		int continuar = strcmp(testador, flag1);
+		if(continuar!=0) {
+			aux=atoi(testador);
+			if((aux==0) && (strcmp(flag2,testador))!=0) {
+				printf("comando invalido, tente novamente.\n");
+				continue;
+			}
+			vec[i]=aux;
+		}
+		else {
+			break;
+		}
+		i++;
+	}
+	*tamM2R=i;
+	int aux1;
+	printf("selecione um digito k a ser comparado:\n");
+	scanf("%d",&aux1);
+	int k=aux1;
+	/*paridade dos elementos*/
+	int pari[2][*tamM2R],parN=0,impN=0;
+	for(i=0; i<*tamM2R; i++) {
+		if (vec[i]%2==0) {
+			pari[1][parN]=vec[i];
+			parN++;
+		}
+		else {
+			pari[2][impN]=vec[i];
+			impN++;
+		}
+	}
+	printf("\n|||Numeros pares:  ");
+	for(i=0; i<parN; i++) {
+		printf("%d  ",pari[1][i]);
+	}
+	printf("\n|| Total de numeros pares:  %d",parN);
+	printf("\n|||Numeros impares:  ");
+	for(i=0; i<impN; i++) {
+		printf("%d  ",pari[2][i]);
+	}
+	printf("\n|| Total de numeros impares:  %d",impN);
+	/*positividade-negatividade numerica*/
+	int auxv[*tamM2R],PlusM2=0,MinM2=0,nulo=0;
+	printf("\n|||Numeros positivos:  ");
+	for(i=0; i<*tamM2R; i++) {
+		if(vec[i]>0) {
+			auxv[i]=vec[i];
+			PlusM2++;
+			printf("%d  ",auxv[i]);
+		}
+	}
+	printf("\n|| Total de numeros positivos:  %d",PlusM2);
+	printf("\n|||Numeros negativos:  ");
+	for(i=0; i<*tamM2R; i++) {
+		if(vec[i]<0) {
+			MinM2=MinM2+1;
+			printf("%d  ",vec[i]);
+		}
+		else if(vec[i]==0) {
+			nulo++;
+		}
+	}
+	printf("\n|| Total de numeros negativos:  %d",MinM2);
+	printf("\n|||Total de elementos equivalentes a 0:  %d",nulo);
+	/*primalidade dos elementos*/
+	int check,t=0;
+	printf("\n|||Numeros primos:  ");
+	for(i=0; i<*tamM2R; i++) {
+		check=Isprimo(vec[i]);
+		if (check==1) {
+			t++;
+			printf("%d  ",vec[i]);
+		}
+	}
+	printf("\n||Total de numeros primos:  %d",t);
+	t=0;
+	/*multiplo K*/
+	printf("\n|||Multiplos de K:  ");
+	for(i=0; i<*tamM2R; i++) {
+		if (vec[i]%k==0) {
+			printf("%d  ",vec[i]);
+			t++;
+		}
+	}
+	printf("\n||Total de multiplos de K:  %d",t);
+	int j;
+	printf("\n|||Vetor Invertido:  ");
+	for(j=*tamM2R-1; j>=0; j--) {
+		printf("  %d",vec[j]);
+	}
 
+}
+
+int Isprimo(int n) {
+	if (n <= 1) return 0;
+	for (int i = 2; i * i <= n; i++) {
+		if (n % i == 0) {
+			return 0;
+		}
+	}
+	return 1;
+}void EscolheVetor(int vec[],int tamM2,int *tamM2R) {
+	char  testador[20], flag1[]="parar", flag2[]="0";
+	int aux, i=0;
+	printf("Informe um vetor de tamanho maximo de 100 valores,digite parar para contabilizar o vetor:\n");
+	while(i<=tamM2) {
+		printf("Elemento [%d]: ",i+1);
+		scanf("%19s",testador);
+		int continuar = strcmp(testador, flag1);
+		if(continuar!=0) {
+			aux=atoi(testador);
+			if((aux==0) && (strcmp(flag2,testador))!=0) {
+				printf("comando invalido, tente novamente.\n");
+				continue;
+			}
+			vec[i]=aux;
+		}
+		else {
+			break;
+		}
+		i++;
+	}
+	*tamM2R=i;
+	int aux1;
+	printf("selecione um digito k a ser comparado:\n");
+	scanf("%d",&aux1);
+	int k=aux1;
+	/*paridade dos elementos*/
+	int pari[2][*tamM2R],parN=0,impN=0;
+	for(i=0; i<*tamM2R; i++) {
+		if (vec[i]%2==0) {
+			pari[1][parN]=vec[i];
+			parN++;
+		}
+		else {
+			pari[2][impN]=vec[i];
+			impN++;
+		}
+	}
+	printf("\n|||Numeros pares:  ");
+	for(i=0; i<parN; i++) {
+		printf("%d  ",pari[1][i]);
+	}
+	printf("\n|| Total de numeros pares:  %d",parN);
+	printf("\n|||Numeros impares:  ");
+	for(i=0; i<impN; i++) {
+		printf("%d  ",pari[2][i]);
+	}
+	printf("\n|| Total de numeros impares:  %d",impN);
+	/*positividade-negatividade numerica*/
+	int auxv[*tamM2R],PlusM2=0,MinM2=0,nulo=0;
+	printf("\n|||Numeros positivos:  ");
+	for(i=0; i<*tamM2R; i++) {
+		if(vec[i]>0) {
+			auxv[i]=vec[i];
+			PlusM2++;
+			printf("%d  ",auxv[i]);
+		}
+	}
+	printf("\n|| Total de numeros positivos:  %d",PlusM2);
+	printf("\n|||Numeros negativos:  ");
+	for(i=0; i<*tamM2R; i++) {
+		if(vec[i]<0) {
+			MinM2=MinM2+1;
+			printf("%d  ",vec[i]);
+		}
+		else if(vec[i]==0) {
+			nulo++;
+		}
+	}
+	printf("\n|| Total de numeros negativos:  %d",MinM2);
+	printf("\n|||Total de elementos equivalentes a 0:  %d",nulo);
+	/*primalidade dos elementos*/
+	int check,t=0;
+	printf("\n|||Numeros primos:  ");
+	for(i=0; i<*tamM2R; i++) {
+		check=Isprimo(vec[i]);
+		if (check==1) {
+			t++;
+			printf("%d  ",vec[i]);
+		}
+	}
+	printf("\n||Total de numeros primos:  %d",t);
+	t=0;
+	/*multiplo K*/
+	printf("\n|||Multiplos de K:  ");
+	for(i=0; i<*tamM2R; i++) {
+		if (vec[i]%k==0) {
+			printf("%d  ",vec[i]);
+			t++;
+		}
+	}
+	printf("\n||Total de multiplos de K:  %d",t);
+	int j;
+	printf("\n|||Vetor Invertido:  ");
+	for(j=*tamM2R-1; j>=0; j--) {
+		printf("  %d",vec[j]);
+	}
+
+}
+
+int Isprimo(int n) {
+	if (n <= 1) return 0;
+	for (int i = 2; i * i <= n; i++) {
+		if (n % i == 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
 
 
 //--------------------------FUNCOES DO MODULO 3--------------------------//
+void Fibonnaci(int nTermo, int vec[]) {
+	for(int i=0; i<nTermo; i++) {
+		if (i<=1) {
+			vec[i]=1;
+		}
+		else {
+			vec[i]=vec[i-1]+vec[i-2];
+		}
+	}
+}
+void numTrig(int nTermo,int vec[]) {
+	for(int i=0; i<nTermo; i++) {
+		vec[i]=i*(i+1)/2;
+	}
+}
+void Pot2(int nTermo,int vec[]) {
+    for(int i=0; i<nTermo; i++){
+        if (i==0)vec[i]=1;
+        else{
+            vec[i]=2*vec[i-1];
+        }
+    }
 
+}
+void menuM3(){
+    	int vec[MAXM3],escolha=0;
+	char choice;
+	int i=0,termN=0;
+	printf("------Modulo 3------\n");
+	while(i==0) {
+	    printf("Escolha a quantidade de termos(entre 1 e 30):\n");
+		scanf("%d", &termN);
+		if(termN>0 && termN<31) {
+			i=1;
+			printf("\n\n\n");
+		}
+		else {
+			printf("comando invalido, tente novamente.\n\n\n");
+		}
+	}
+
+		printf("digite o digito para escolher a função a ser utilizada:\n");
+		printf("1-Sequencia Fibonnaci.\n");
+		printf("2-Sequencia Triangular.\n");
+		printf("3-Sequencia das potencias de 2.\n");
+		printf("-------------------------------\n");
+		printf("Sequencia-");
+		scanf("%d",&choice);
+		while (escolha==0) {
+
+			switch (choice)
+			{
+			case 1:
+				Fibonnaci( termN, vec);
+				escolha=1;
+				break;
+			case 2:
+				numTrig(termN, vec);
+				escolha=1;
+				break;
+			case 3:
+				Pot2(termN, vec);
+				escolha=1;
+				break;
+			default:
+				printf("Comando Invalido.\n");
+			}
+		}
+			printf("Sequencia:  ");
+		for(int i=0; i<termN; i++){
+		    printf("%d  ",vec[i]);
+		}
+	 termN=0;
+	 printf("\npressione 0 para voltar para o menu principal e 1 para Reiniciar o modulo 3:");
+	 int f;
+	 scanf("%d",&f);
+	 if (f==1){
+	     menuM3();
+	 }
+        else{
+                menu
+        }
+}
 
 
 //--------------------------FUNCOES DO MODULO 4--------------------------//
